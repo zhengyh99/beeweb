@@ -16,7 +16,7 @@ func PathExists(path string) (bool, error) {
 	}
 	return false, err
 }
-
+//IsExistsInGoPath 在GoPath中判断文件是否存在
 func IsExistsInGoPath(file string) bool {
 	gopaths := strings.Split(os.Getenv("GOPATH"), ";")
 
