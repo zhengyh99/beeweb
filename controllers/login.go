@@ -12,6 +12,13 @@ type LoginController struct {
 
 //Get 登陆Get请求
 func (l *LoginController) Get() {
+	isExit := l.Input().Get("exit") == "true"
+	if isExit {
+		l.Ctx.SetCookie("uname", "", -1, "/")
+		l.Ctx.SetCookie("pwd", "", -1, "/")
+		l.Redirect("/", 301)
+		return
+	}
 
 	l.Data["IsHome"] = "true"
 	l.TplName = "login.html"
