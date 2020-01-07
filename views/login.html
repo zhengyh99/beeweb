@@ -7,16 +7,24 @@
         {{template "navbar" .}}
         </div>
     </div>
-
-
     <div class="container">
-        <div class="page-header">
-            <h1>这是我的第一篇bee blog </h1>
-            <h6>文章发表于 *****年**月**日，共有**人浏览，***条评论</h6>
-            <p>
-                大家好，这是我的第一篇bee blog ，欢迎观看！！！
-            </p>
-        </div>
-    </div>
+        <form action="/login" method="POST">
+            <div class="form-group">
+            <label for="exampleInputEmail1">用户名：</label>
+            <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="user name">
+            </div>
+            <div class="form-group">
+            <label for="exampleInputPassword1">密码：</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+
+            <div class="checkbox">
+            <label>
+                <input type="checkbox" name="autologin" value="on"> 记住用户名密码
+            </label>
+            </div>
+            <button type="submit" class="btn btn-default">登陆</button>
+        </form>
+      </div>
 </body>
 </html>
