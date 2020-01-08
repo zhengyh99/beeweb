@@ -1,0 +1,67 @@
+{{template "header"}}
+    <title>bee blog</title>
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+        {{template "navbar" .}}
+        </div>
+    </div>
+
+
+    <div class="container">
+        <form action="/category" method="GET">
+            <div class="form-group">
+            <label for="exampleInputEmail1">名称：</label>
+            <input type="text" id="title" name="title" class="form-control" id="exampleInputEmail1" placeholder="请输入标题">
+            <input type="hidden" name="op" value="add">
+            </div>           
+            <button type="submit" class="btn btn-default" onclick="return checkInput();">添加</button>
+        </form>
+        <script type="text/javascript">
+            function checkInput(){
+                if ($("#title").val() ==""){
+                    alert("用户名不得为空");
+                    return false;
+                }
+                
+                return true;
+            }
+            
+        </script>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>标题</th>
+                    <th>文章数</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>                
+                {{range .categories}}
+                    <tr>
+                        <th>{{.ID}}</th>
+                        <th>{{.Title}}</th>
+                        <th>{{.TopicCount}}</th>
+                        <th><a href="/category?op=del&id={{.ID}}" onclick="return sureDel();">删除</a></th> 
+                    </tr>
+                {{end}}               
+            </tbody>
+        </table>
+        
+    </div>
+    <script type="text/javascript">
+        function sureDel(){
+            var r=confirm("是否要删除些标题")
+            if (r==true){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+       
+    </script>
+</body>
+</html>
