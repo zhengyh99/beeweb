@@ -12,6 +12,6 @@ type HomeController struct {
 //Get 客户端GET请求
 func (h *HomeController) Get() {
 	h.Data["IsLogin"] = checkAccount(h.Ctx)
-	h.Data["IsHome"] = "true"
+	h.Data["IsHome"] = true
 	h.TplName = "home.html"
 }

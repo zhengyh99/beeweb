@@ -44,6 +44,6 @@ func (c *CategoryController) Get() {
 	}
 	c.Data["categories"] = models.GetAllCategory()
 	c.Data["IsLogin"] = checkAccount(c.Ctx)
-	c.Data["IsCategory"] = "true"
+	c.Data["IsCategory"] = true
 	c.TplName = "category.html"
 }

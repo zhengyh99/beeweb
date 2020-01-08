@@ -20,7 +20,7 @@ func (l *LoginController) Get() {
 		return
 	}
 
-	l.Data["IsHome"] = "true"
+	l.Data["IsHome"] = true
 	l.TplName = "login.html"
 }
 
