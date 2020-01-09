@@ -12,10 +12,10 @@
     <div class="container">
         <form action="/topic" method="POST">
             <div class="form-group">
-            <label for="exampleInputEmail1">文章标题：</label>
+            <label for="title">文章标题：</label>
             <input type="text" id="title" name="title" class="form-control" placeholder="请输入标题">
-            <label for="exampleInputEmail1">文章内容：</label>    
-            <textarea name="content" class="form-control></textarea>       
+            <label for="content">文章内容：</label>    
+            <textarea id="content" name="content" class="form-control" cols="30" rows="20"></textarea>       
             <button type="submit" class="btn btn-default" onclick="return checkInput();">添加</button>
         </form>
         <script type="text/javascript">

@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"beeweb/models"
+
 	"github.com/astaxie/beego"
 )
 
@@ -13,5 +15,6 @@ type HomeController struct {
 func (h *HomeController) Get() {
 	h.Data["IsLogin"] = checkAccount(h.Ctx)
 	h.Data["IsHome"] = true
+	h.Data["topics"] = models.GetAllTopic(false)
 	h.TplName = "home.html"
 }

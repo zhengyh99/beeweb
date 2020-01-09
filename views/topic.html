@@ -10,6 +10,7 @@
 
 
     <div class="container">
+        <button type="button" class="btn btn-default" onclick="addTopic();">添加</button>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -25,7 +26,7 @@
                     <tr>
                         <th>{{.ID}}</th>
                         <th>{{.Title}}</th>
-                        <th>{{.Updated}}</th>
+                        <th>{{.Updated.Format "2006年01月02日 15:04:05" }}</th>
                         <th>{{.Views}}</th>
                         <th>{{.ReplyCount}}</th>
                     </tr>
@@ -34,6 +35,11 @@
         </table>
         
     </div>
-
+    <script type="text/javascript">
+        function addTopic(){
+           window.location.href = "/topic/add"
+        }
+        
+    </script>
 </body>
 </html>
