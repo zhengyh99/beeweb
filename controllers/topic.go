@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"beeweb/models"
+	"strconv"
 
 	"github.com/astaxie/beego"
 )
@@ -30,9 +31,48 @@ func (t *TopicController) Post() {
 		t.Redirect("/login", 302)
 		return
 	}
+	op := t.Input().Get("op")
 	title := t.Input().Get("title")
 	content := t.Input().Get("content")
-	models.AddTopic(title, content)
+	if op == "update" {
+		id, err := strconv.ParseInt(t.Input().Get("tid"), 10, 64)
+		if err == nil {
+			models.UpdateTopic(id, title, content)
+		}
+		beego.Error(err)
+	} else {
+		models.AddTopic(title, content)
+	}
+
+	t.Redirect("/topic", 302)
+}
+
+//View 客户端GET请求
+func (t *TopicController) View() {
+	t.Data["IsLogin"] = checkAccount(t.Ctx)
+	t.Data["IsTopic"] = true
+	t.TplName = "topic_view.html"
+	id, err := strconv.ParseInt(t.Ctx.Input.Param("0"), 10, 64)
+	if err != nil {
+		beego.Error(err)
+		t.Redirect("/topic", 302)
+		return
+	}
+
+	t.Data["topic"] = models.GetTopic(id)
+}
+
+func (t *TopicController) Del() {
+	t.Data["IsLogin"] = checkAccount(t.Ctx)
+	t.Data["IsTopic"] = true
+	t.TplName = "topic_view.html"
+	id, err := strconv.ParseInt(t.Ctx.Input.Param("0"), 10, 64)
+	if err != nil {
+		beego.Error(err)
+
+	} else {
+		models.DelTopic(id)
+	}
 
 	t.Redirect("/topic", 302)
 }

@@ -61,3 +61,47 @@ func GetAllTopic(isDesc bool) []*Topic {
 
 	return topics
 }
+
+func GetTopic(id int64) *Topic {
+	o := orm.NewOrm()
+	topic := new(Topic)
+	qs := o.QueryTable("topic")
+	err := qs.Filter("id", id).One(topic)
+	if err != nil {
+		return nil
+	}
+	topic.Views++
+	_, err = o.Update(topic)
+	if err != nil {
+		beego.Error(err)
+		return nil
+	}
+	return topic
+}
+
+func UpdateTopic(id int64, title, content string) bool {
+	o := orm.NewOrm()
+	topic := new(Topic)
+	topic.ID = id
+	topic.Title = title
+	topic.Content = content
+	topic.Updated = time.Now()
+	_, err := o.Update(topic)
+	if err != nil {
+		beego.Error(err)
+		return false
+	}
+	return true
+}
+
+func DelTopic(id int64) bool {
+	o := orm.NewOrm()
+	topic := new(Topic)
+	topic.ID = id
+	_, err := o.Delete(topic)
+	if err != nil {
+		beego.Error(err)
+		return false
+	}
+	return true
+}

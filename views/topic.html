@@ -19,16 +19,18 @@
                     <th>最后更新</th>
                     <th>浏览</th>
                     <th>回复数</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>                
                 {{range .topics}}
                     <tr>
                         <th>{{.ID}}</th>
-                        <th>{{.Title}}</th>
+                        <th><a href="/topic/view/{{.ID}}">{{.Title}}</a></th>
                         <th>{{.Updated.Format "2006年01月02日 15:04:05" }}</th>
                         <th>{{.Views}}</th>
                         <th>{{.ReplyCount}}</th>
+                        <th><a href="/topic/del/{{.ID}}" onclick="return sureDel();">删除</a></th>
                     </tr>
                 {{end}}               
             </tbody>
@@ -38,6 +40,15 @@
     <script type="text/javascript">
         function addTopic(){
            window.location.href = "/topic/add"
+        }
+        function sureDel(){
+            var r=confirm("是否要删除些标题")
+            if (r==true){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
         
     </script>
